@@ -1,0 +1,175 @@
+<button class="btn bg-primary" (click)="get()">Get</button>
+<button class="btn bg-primary" (click)="pop()">ADD new product</button>
+<button class="btn bg-primary" (click)="pp()">update</button>
+<button class="btn bg-primary" (click)="pp2()">delete</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="product_type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.product_type}} </td>
+          </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="product_name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef> Product </th>
+      <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef> Cost </th>
+      <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+    </ng-container>
+    <ng-container matColumnDef="product_material">
+        <th mat-header-cell *matHeaderCellDef> Material </th>
+        <td mat-cell *matCellDef="let element"> {{element.product_material}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="product_image">
+      <th mat-header-cell *matHeaderCellDef> Image </th>
+      <td mat-cell *matCellDef="let element"><img src="{{element.product_image}}" width="100px" height="100px"> </td>
+    </ng-container>
+    <ng-container >
+      <th mat-header-cell *matHeaderCellDef> action </th>
+      <button class="btn bg-primary" (click)="read(values.id)">update</button>  
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="Canshow">
+    <div class="wrapper">   
+        <form #r="ngForm" (ngSubmit)="Insert(r)" >
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example8" placeholder="CREATED AT" name="createdAt" ngModel class="form-control form-control-lg" />
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example8" placeholder="PRODUCT NAME" name="product_name" ngModel class="form-control form-control-lg" />
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example8" placeholder="PRODUCT IMAGE " name="product_image" ngModel class="form-control form-control-lg" />
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" id="form3Example1m1" placeholder="PRODUCT TYPE" name="product_type" ngModel class="form-control form-control-lg" />
+                    </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" id="form3Example1n1" placeholder="COST" name="cost" ngModel class="form-control form-control-lg" />
+                </div>
+              </div>
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example9" placeholder="DESCRIPTION" name="description" ngModel class="form-control form-control-lg" />
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example90" placeholder="PRODUCT MATERIAL" name="product_material" ngModel class="form-control form-control-lg" />
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example99"placeholder="PRODUCT" name="product" ngModel class="form-control form-control-lg" />
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example97"placeholder="ID" name="id" ngModel class="form-control form-control-lg" />
+            </div>
+
+            <div class="d-flex justify-content-end pt-3">
+              <button type="button" class="btn btn-light btn-lg">Reset all</button>
+              <button type="submit" class="btn btn-success btn-lg ms-2" >Submit form</button>
+            </div>
+</form>
+              </div>
+          </div>
+  
+
+          <div *ngIf="anshow">
+            <div class="wrapper">   
+              <form (ngSubmit)="read(values.id)">
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example97"placeholder="ID" name="id" [(ngModel)]="values.id" class="form-control form-control-lg" />
+                </div>      
+                <button type="submit" class="btn btn-success btn-sm ms-2">GET</button>
+            
+      
+                
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example97"placeholder="ID" name="id" [(ngModel)]="values.id" class="form-control form-control-lg" />
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example8" placeholder="CREATED AT" name="createdAt" [(ngModel)]="values.createdAt" class="form-control form-control-lg" />
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example8" placeholder="PRODUCT NAME" name="product_name" [(ngModel)]="values.product_name" class="form-control form-control-lg" />
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example8" placeholder="PRODUCT IMAGE " name="product_image" [(ngModel)]="values.product_image" class="form-control form-control-lg" />
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="form3Example1m1" placeholder="PRODUCT TYPE" name="product_type" [(ngModel)]="values.product_type" class="form-control form-control-lg" />
+                            </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="form3Example1n1" placeholder="COST" name="cost" [(ngModel)]="values.cost" class="form-control form-control-lg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example9" placeholder="DESCRIPTION" name="description" [(ngModel)]="values.description" class="form-control form-control-lg" />
+                    </div>
+        
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example90" placeholder="PRODUCT MATERIAL" name="product_material" [(ngModel)]="values.product_material" class="form-control form-control-lg" />
+                    </div>
+        
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example99"placeholder="PRODUCT" name="product" [(ngModel)]="values.product" class="form-control form-control-lg" />
+                    </div>
+        
+                   
+                    <button type="submit" class="btn btn-success btn-sm ms-2" (click)="update()">update</button>
+        
+                    <div class="d-flex justify-content-end pt-3">
+                      <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                    </div>
+        </form>
+                      </div>
+                  </div>
+          
+  
+  
+                  <div *ngIf="myshow">
+                    <div class="wrapper">   
+                      <form>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form3Example97"placeholder="ID" name="id" [(ngModel)]="values.id" class="form-control form-control-lg" />
+                        </div>
+                        <div class="d-flex justify-content-end pt-3">
+                          <button type="button" class="btn btn-danger btn-lg" (click)="delete()">delete</button>
+                        </div>
+                </form>
+                              </div>
+                          </div>
+                  
